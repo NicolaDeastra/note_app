@@ -1,4 +1,5 @@
 const fs = require('fs')
+const consola = require('consola')
 
 const getNotes = () => {
   return "Odading mang oleh rasanya seperti anda menjadi iron men"
@@ -15,10 +16,10 @@ const addNote = (title, body) => {
 
     saveNote(notes)
     
-    console.log('success add note')
+    consola.success('success add note')
 
   } else{
-    console.log('Note title already on notes')
+    consola.info('Note title already on notes')
   }
 
 }
@@ -41,4 +42,19 @@ const loadNote = () => {
   }
 }
 
-module.exports = {getNotes, addNote}
+const removeNote = (title) => {
+  const notes = loadNote()
+
+  const deleteNote = notes.filter( note => note.title !== title )
+
+  if(notes.length === deleteNote.length){
+   
+    consola.info('note already delete or note note found')
+
+  }else{
+    saveNote(deleteNote)
+    consola.success('note success to delete')
+  }
+} 
+
+module.exports = { getNotes, addNote, removeNote}

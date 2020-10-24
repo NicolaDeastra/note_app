@@ -1,5 +1,6 @@
 const fs = require('fs')
 const consola = require('consola')
+const { title } = require('process')
 
 const getNotes = () => {
   return "Odading mang oleh rasanya seperti anda menjadi iron men"
@@ -24,6 +25,19 @@ const addNote = (title, body) => {
 
 }
 
+const listNote = () => {
+  const notes = loadNote()
+
+  
+  if (notes.length === 0) {
+    consola.error("You don't have notes")
+   
+  }
+  
+  consola.info('Your notes :')
+  const title = notes.map( note => console.log(`  -${note.title}`))
+
+}
 
 const saveNote = (notes) => {
   const notesJSON = JSON.stringify(notes)
@@ -57,4 +71,4 @@ const removeNote = (title) => {
   }
 } 
 
-module.exports = { getNotes, addNote, removeNote}
+module.exports = { getNotes, addNote, removeNote ,listNote}
